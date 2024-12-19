@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 facemark = cv2.face.createFacemarkLBF()
-model_path = "Data\lbfmodel.yaml"
+model_path = "Data/lbfmodel.yaml"
 facemark.loadModel(model_path)
 
 # Cartoon PS2-style effect function
@@ -17,7 +17,7 @@ def cartoon_ps2_style(image):
     # Color quantization (reduce color palette)
     Z = color.reshape((-1, 3))
     Z = np.float32(Z)
-    K = 4  # Fewer colors for faster quantization
+    K = 8  # Fewer colors for faster quantization
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 5, 1.0)
     _, labels, centers = cv2.kmeans(Z, K, None, criteria, 5, cv2.KMEANS_RANDOM_CENTERS)
     centers = np.uint8(centers)
@@ -93,7 +93,7 @@ def add_comic_bubble(frame, face, expression, bubble_image_path):
         cv2.putText(frame, line, (line_x, line_y), font, font_scale, (0, 0, 0), thickness, cv2.LINE_AA)
 
 # Initialize Haar Cascade for face detection
-face_cascade = cv2.CascadeClassifier('Data\haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier('Data/haarcascade_frontalface_default.xml')
 # Open the webcam
 cap = cv2.VideoCapture(0)
 
@@ -102,7 +102,7 @@ if not cap.isOpened():
     exit()
 
 # Path to your custom comic bubble image
-bubble_image_path = r'Images\nah.png'
+bubble_image_path = r'Images/nah.png'
 
 frame_count = 0  # Counter for skipping frames
 
