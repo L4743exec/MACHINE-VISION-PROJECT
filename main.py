@@ -13,7 +13,7 @@ def cartoon_ps2_style(image):
     # Color quantization (reduce color palette)
     Z = color.reshape((-1, 3))
     Z = np.float32(Z)
-    K = 4  # Fewer colors for faster quantization
+    K = 8  # Fewer colors for faster quantization
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 5, 1.0)
     _, labels, centers = cv2.kmeans(Z, K, None, criteria, 5, cv2.KMEANS_RANDOM_CENTERS)
     centers = np.uint8(centers)
